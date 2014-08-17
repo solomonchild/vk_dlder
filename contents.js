@@ -26,6 +26,7 @@ function yo() {
 }
 function getAudioElemList() {
 
+    getVideoElem();
     show_comments = document.getElementsByClassName('wr_header');
     Array.prototype.forEach.call(show_comments, function(show_comment) {
             show_comment.onclick = function() {
@@ -65,7 +66,19 @@ function getAudioElemList() {
 }
 
 function getVideoElem() {
-    return document.getElementsByName('video_player');
+    video_player = document.getElementById('video_player');
+    if(video_player == null)
+        return;
+    p240 = new RegExp("http[^http]*240.mp4");
+    p360 = new RegExp("http[^http]*360.mp4");
+    p480 = new RegExp("http[^http]*480.mp4");
+    p720 = new RegExp("http[^http]*720.mp4");
+    arr = [ p240, p360, p480, p720 ];
+    text = video_player.getAttribute('flashvars');
+    arr.forEach(function(elem) {
+        console.log(elem.exec(text)[0].replace("%3A", ":").replace(/%2F/g, "/"));
+    });
+
 }
 
 function onScroll(event) {

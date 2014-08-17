@@ -1,0 +1,19 @@
+ {
+  "manifest_version": 2,
+  "name": "VK dlder",
+  "version": "1.0",
+  
+  "content_scripts": [
+    {
+      "matches": [ "*://*/*" ],
+      "js": [ "contents.js" ]
+    }
+  ],
+  "permissions": [
+    "http://vk.com/*"
+  ],
+  "web_accessible_resources": [
+       "images/*"
+     ]
+    
+}

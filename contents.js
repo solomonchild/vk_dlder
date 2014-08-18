@@ -27,7 +27,7 @@ function getAudioElemList() {
     //handle video player elements
     getVideoElem();
     
-    //assing onClick for "Expand comment" anchors
+    //assign onClick for "Expand comment" anchors
     show_comments = document.getElementsByClassName('wr_header');
     Array.prototype.forEach.call(show_comments, function(show_comment) {
             show_comment.onclick = function() {

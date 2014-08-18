@@ -48,7 +48,7 @@ function getAudioElemList() {
             before_ins = tr.childNodes[3];
             
             //If third element's classname is not info,
-            //then it was processed before
+            //then this "Play" button has been processed before
             if(before_ins.className == "info") {
                 url = getAudioUrl(play_btn);
                 dl_a = document.createElement('a');
@@ -59,7 +59,7 @@ function getAudioElemList() {
 
                 dl_div = document.createElement('div');
                 
-                //Google extension-specific code :)
+                //Google extension-specific code
                 iconUrl = chrome.extension.getURL("images/play.gif"); 
                 dl_div.setAttribute("style", "background:url('" + iconUrl + "') no-repeat 0px 0px !important;");
                 dl_div.className = 'play_new';
@@ -88,6 +88,7 @@ function getVideoElem() {
     text = video_player.getAttribute('flashvars');
     
     //TODO: place links instead of logging them
+    //TODO:check exec() for null, as not every video has all resolutions available
     arr.forEach(function(elem) {
         console.log(elem.exec(text)[0].replace("%3A", ":").replace(/%2F/g, "/"));
     });

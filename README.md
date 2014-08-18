@@ -3,7 +3,7 @@ vk_dlder
 
 Info
 ----
-Download music and (soon) videos from vk
+Download music and videos from vk
 
 Disclaimer
 ---------

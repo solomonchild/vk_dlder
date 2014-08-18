@@ -7,11 +7,11 @@ function getAudioUrl(play_btn) {
             match_group = AudioReg.exec(elem.value);
             if(match_group != null) 
             {
-            url = match_group[0];
-            return false;
+                url = match_group[0];
+                return false;
             }
             return true;
-            });
+    });
     return url;
 }
 
@@ -87,10 +87,20 @@ function getVideoElem() {
     arr = [ p240, p360, p480, p720 ];
     text = video_player.getAttribute('flashvars');
     
-    //TODO: place links instead of logging them
-    //TODO:check exec() for null, as not every video has all resolutions available
     arr.forEach(function(elem) {
-        console.log(elem.exec(text)[0].replace("%3A", ":").replace(/%2F/g, "/"));
+        match_group = elem.exec(text)
+        if(match_group == null)
+            return;
+        link = match_group[0].replace(/%3A/g, ':').replace(/%2F/g, '/');
+        actions = document.getElementById('mv_actions');
+
+        a_dl = document.createElement('a');
+        a_dl.setAttribute('href', link);
+        a_dl.setAttribute('download', '');
+
+        len = link.length
+        a_dl.innerHTML = 'Скачать ' + link.substring(len - 7, len - 4) +"p"; 
+        actions.appendChild(a_dl);
     });
 
 }

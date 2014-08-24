@@ -26,7 +26,12 @@ function getAudioElemList() {
 
     //handle video player elements
     getVideoElem();
-    
+    tumbs = document.getElementsByClassName('video_row_relative')
+    Array.prototype.forEach.call(tumbs, function(elem) {
+        elem.onclick = function() { console.log("CLICK"); }
+    });
+     
+
     //assign onClick for "Expand comment" anchors
     show_comments = document.getElementsByClassName('wr_header');
     Array.prototype.forEach.call(show_comments, function(show_comment) {
@@ -43,33 +48,36 @@ function getAudioElemList() {
     //Handle all "Play" buttons on a page
     play_buttons = document.getElementsByClassName('play_btn_wrap');
     Array.prototype.forEach.call(play_buttons, function(play_btn) {
-            tr = play_btn.parentNode.parentNode;
-             //third one is "info" td, insert before it
-            before_ins = tr.childNodes[3];
-            
-            //If third element's classname is not info,
-            //then this "Play" button has been processed before
-            if(before_ins.className == "info") {
-                url = getAudioUrl(play_btn);
-                dl_a = document.createElement('a');
-                dl_a.setAttribute('href', url);
-                dl_a.setAttribute('download', "");
-                dl_a.setAttribute("style", "padding: 8px; padding-top:0px;");
-                dl_a.onclick = onDlClick;
 
-                dl_div = document.createElement('div');
+            elem = play_btn.parentNode.parentNode;
+            if(elem.tagName == 'TR') {
+                 //third one is "info" td, insert before it
+                before_ins = elem.childNodes[3];
                 
-                //Google extension-specific code
-                iconUrl = chrome.extension.getURL("images/play.gif"); 
-                dl_div.setAttribute("style", "background:url('" + iconUrl + "') no-repeat 0px 0px !important;");
-                dl_div.className = 'play_new';
-                dl_div.appendChild(dl_a);
+                //If third element's classname is not info,
+                //then this "Play" button has been processed before
+                if(before_ins.className == "info") {
+                    url = getAudioUrl(play_btn);
+                    dl_a = document.createElement('a');
+                    dl_a.setAttribute('href', url);
+                    dl_a.setAttribute('download', "");
+                    dl_a.setAttribute("style", "padding: 8px; padding-top:0px;");
+                    dl_a.onclick = onDlClick;
+
+                    dl_div = document.createElement('div');
+                    
+                    //Google extension-specific code
+                    iconUrl = chrome.extension.getURL("images/play.gif"); 
+                    dl_div.setAttribute("style", "background:url('" + iconUrl + "') no-repeat 0px 0px !important;");
+                    dl_div.className = 'play_new';
+                    dl_div.appendChild(dl_a);
 
 
-                fresh_td = document.createElement('td');
-                fresh_td.setAttribute('style', 'padding-top:6px; padding-right:6px; ');
-                fresh_td.appendChild(dl_div);
-                tr.insertBefore(fresh_td, before_ins);
+                    fresh_td = document.createElement('td');
+                    fresh_td.setAttribute('style', 'padding-top:6px; padding-right:6px; ');
+                    fresh_td.appendChild(dl_div);
+                    elem.insertBefore(fresh_td, before_ins);
+                }
             }
     });
 }
@@ -114,6 +122,7 @@ function onScroll(event) {
         //no problem calling it several times
         //as this case is handled inside (checking for "info")
         getAudioElemList();
+
     }
 }
 

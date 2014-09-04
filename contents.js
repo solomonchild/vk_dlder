@@ -1,4 +1,4 @@
-AudioReg = new RegExp("http://.*audios.*\.mp3")
+AudioReg = new RegExp("http://.*\.mp3")
 
 function getAudioUrl(play_btn) {
     arr = play_btn.children[0].parentNode.parentNode.children;

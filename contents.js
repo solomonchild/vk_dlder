@@ -1,10 +1,13 @@
-AudioReg = new RegExp("http://.*\.mp3")
+AudioReg = new RegExp("(https://.*\.mp3).*")
 
 function getAudioUrl(play_btn) {
     arr = play_btn.children[0].parentNode.parentNode.children;
+    //console.log(arr)
     var url;
     Array.prototype.every.call(arr, function(elem) {
+            //console.log("Val: " + elem.value)
             match_group = AudioReg.exec(elem.value);
+            //console.log("match: " + match_group)
             if(match_group != null) 
             {
                 url = match_group[0];
